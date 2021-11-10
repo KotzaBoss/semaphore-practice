@@ -1,11 +1,11 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -pedantic -pthread -Wno-builtin-declaration-mismatch
-SRC=car.c entry.c bridge.c log.c main.c
-DEP=car.h entry.h bridge.h direction.h log.h
+SRC=log.c ferry.c car.c main.c
+DEP=log.h ferry.h car.h
 
 
 default: objs
-	$(CC) $(CFLAGS) $(SRC) -o ../nr
+	$(CC) $(CFLAGS) obj/*.o -o ../ferry
 
 objs:
 	mkdir -p obj
@@ -13,4 +13,4 @@ objs:
 	mv *.o obj
 
 clean:
-	rm -f obj/*.o ../nr
+	rm -f obj/*.o ../ferry
