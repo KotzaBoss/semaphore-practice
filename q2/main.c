@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define DEFAULT_CARS 5
+#define DEFAULT_CARS 50
 
 static
 int check_args(int argc, char* argv[])
