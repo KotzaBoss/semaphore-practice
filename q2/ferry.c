@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <semaphore.h>
 #include <pthread.h>
+#include <sched.h>
 #include <assert.h>
 #include <stdbool.h>
 #include <unistd.h>
@@ -67,14 +68,14 @@ void Ferry_queue_car(Ferry self)
 			// Try to minimise "leak" of cars after the alarm rings
 			{
 				sem_post(&self->queued_mut);
-				pthread_yield();
+				sched_yield();
 				continue;
 			}
 
 			if (self->queued > 0 && self->queued % self->capacity == 0)
 			{
 				sem_post(&self->queued_mut);
-				pthread_yield();
+				sched_yield();
 				continue;
 			}
 			++self->queued;
