@@ -71,16 +71,18 @@ void Ferry_queue_car(Ferry self)
 				sched_yield();
 				continue;
 			}
-
-			if (self->queued > 0 && self->queued % self->capacity == 0)
+			else if (self->queued > 0 && self->queued % self->capacity == 0)
+			// If ferry is full
 			{
 				sem_post(&self->queued_mut);
 				sched_yield();
 				continue;
 			}
-			++self->queued;
-
-			logf("Car %ld -> %d queued\n", CAR_ID, self->queued);
+			else
+			{
+				++self->queued;
+				logf("Car %ld -> %d queued\n", CAR_ID, self->queued);
+			}
 		sem_post(&self->queued_mut);
 		return;
 	}
